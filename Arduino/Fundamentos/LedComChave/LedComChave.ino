@@ -6,7 +6,7 @@ void setup()
 
 void loop()
 {
-  if (digitalRead(3) - HIGH) {
+  if (digitalRead(3) == HIGH) {
     digitalWrite(2, HIGH);
   } else {
     digitalWrite(2, LOW);

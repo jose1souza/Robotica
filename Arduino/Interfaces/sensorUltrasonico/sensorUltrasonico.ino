@@ -11,7 +11,7 @@ long readUltrasonicDistance(int triggerPin, int echoPin)
   delayMicroseconds(10);
   digitalWrite(triggerPin, LOW);
   pinMode(echoPin, INPUT);
-  return pulseIn(echoPin, HIGH);
+  return pulseIn(echoPin, HIGH, 30000UL);
 }
 
 void setup()
@@ -26,9 +26,16 @@ void setup()
 
 void loop()
 {
+  const long duration = readUltrasonicDistance(2, 3);
   lcd_1.setCursor(0, 0);
-  lcd_1.print("D = ");
-  lcd_1.print(0.01723 * readUltrasonicDistance(2, 3));
-  lcd_1.print("cm");
-  delay(10); 
+  lcd_1.print("                ");
+  lcd_1.setCursor(0, 0);
+  if (duration == 0) {
+    lcd_1.print("Sem eco");
+  } else {
+    lcd_1.print("D = ");
+    lcd_1.print(0.01723 * duration);
+    lcd_1.print(" cm");
+  }
+  delay(60);
 }
